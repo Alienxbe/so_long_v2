@@ -6,7 +6,7 @@
 #    By: mykman <mykman@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/10 04:00:41 by mykman            #+#    #+#              #
-#    Updated: 2022/08/12 04:30:08 by mykman           ###   ########.fr        #
+#    Updated: 2022/08/12 07:02:01 by mykman           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,14 +36,15 @@ LIBRARIES			:=	-L ${LIBFT_FOLDER} -lft \
 NAME				:=	so_long
 FILES				:=	main.c \
 						ft_scene_waiting.c \
+						ft_scene_title_screen.c \
 						ft_exit.c
 SRCS				:=	$(addprefix srcs/, ${FILES})
 FILES				:=	so_long.h \
-						ft_scene_waiting.h
+						ft_scene_waiting.h \
+						ft_scene_title_screen.h
 HEADERS				:=	$(addprefix includes/, ${FILES});
 
 ${NAME}:	${SRCS} ${HEADERS}
-	@echo "${CURRENT_FOLDER}/${LIBFT_FOLDER}"
 	${MAKE_LIBFT}
 	${MAKE_MLX}
 	${MAKE_LIBFT_MLX} LIBFT_FOLDER=${CURRENT_FOLDER}/${LIBFT_FOLDER} \

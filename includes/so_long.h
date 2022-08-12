@@ -6,7 +6,7 @@
 /*   By: mykman <mykman@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 14:30:05 by mykman            #+#    #+#             */
-/*   Updated: 2022/08/12 04:21:31 by mykman           ###   ########.fr       */
+/*   Updated: 2022/08/12 08:27:38 by mykman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@
 
 # include "ft_scene.h"
 # include "ft_scene_waiting.h"
+# include "ft_scene_title_screen.h"
 
 # define WIN_WIDTH	600
 # define WIN_HEIGHT	450
-# define WIN_NAME	"ft_mlx test"
+# define WIN_NAME	"so_long"
  #define FPS_MAX	120
 
 // => Should go in libft_mlx
@@ -45,6 +46,7 @@ typedef union u_trgb
 enum e_scene_list
 {
 	sc_waiting,
+	sc_title_screen,
 	SC_MAX
 };
 

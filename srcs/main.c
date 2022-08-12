@@ -6,7 +6,7 @@
 /*   By: mykman <mykman@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 04:00:44 by mykman            #+#    #+#             */
-/*   Updated: 2022/08/12 04:10:40 by mykman           ###   ########.fr       */
+/*   Updated: 2022/08/12 08:32:47 by mykman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,12 @@ void	so_long(int argc, const char **argv)
 		&ft_endexec);
 	if (!d.win.win_ptr)
 		ft_error("Window init failed");
+
+	ft_randinit();
 	
 	d.scene_collection[sc_waiting] = new_scene_waiting(d.mlx, d.win.size);
-	d.active_scene = d.scene_collection[sc_waiting];
+	d.scene_collection[sc_title_screen] = new_scene_title_screen(d.mlx, d.win.size);
+	d.active_scene = d.scene_collection[sc_title_screen];
 
 	mlx_loop_hook(d.mlx, &update, &d);
 	mlx_loop(d.mlx);
