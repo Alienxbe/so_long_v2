@@ -6,7 +6,7 @@
 /*   By: mykman <mykman@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 06:34:01 by mykman            #+#    #+#             */
-/*   Updated: 2022/08/12 08:26:51 by mykman           ###   ########.fr       */
+/*   Updated: 2022/08/12 16:20:06 by mykman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 static void	rand_sf(t_snow_flake *sf, int win_height)
 {
 	sf->pos.y = ft_rand(win_height);
-	sf->size = ft_randint(1, 6);
+	sf->size = ft_randint(1, 5);
 	sf->speed = ft_randint(1, 10);
 }
 
@@ -28,10 +28,11 @@ static int	update(t_scene_title_screen *scene)
 {
 	t_snow_flake	*sf;
 
-	ft_scene_setbg(scene->scene, 0x0);
+	// ft_scene_setbg(scene->scene, 0x0);
 	for (int i = 0; i < SF_COUNT; i++)
 	{
 		sf = scene->sf_list + i;
+		ft_pixel_fill(scene->scene.img, (t_area){sf->pos, {sf->pos.x + sf->size, sf->pos.y + sf->size}}, 0x0);
 		if (sf->pos.x > scene->scene.img.size.x)
 		{
 			sf->pos.x = 0;

@@ -6,7 +6,7 @@
 /*   By: mykman <mykman@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 06:34:25 by mykman            #+#    #+#             */
-/*   Updated: 2022/08/12 08:27:47 by mykman           ###   ########.fr       */
+/*   Updated: 2022/08/12 16:08:16 by mykman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ typedef struct s_snow_flake
 	t_point			pos;
 	unsigned int 	size;
 	unsigned int	speed;
-	unsigned int	ampl;
-	unsigned int	freq;
 }	t_snow_flake;
 
 typedef struct s_scene_title_screen
