@@ -6,20 +6,30 @@
 #    By: mykman <mykman@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/10 04:00:41 by mykman            #+#    #+#              #
-#    Updated: 2022/08/12 07:02:01 by mykman           ###   ########.fr        #
+#    Updated: 2022/08/12 23:45:05 by mykman           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+# OS
+ifeq ($(OS),Windows_NT) 
+	detected_OS := Windows
+else
+	detected_OS := $(shell uname)
+endif
 
 # COMPILATION
 CC					:=	@gcc
 CFLAGS				:=	-Wall -Wextra -Werror
-
-MLXFLAGS			:= -framework OpenGL -framework AppKit
+ifeq ($(detected_OS), Linux)
+	MLXFLAGS	:=	-lXext -lX11 -lm -lz
+else ifeq ($(detected_OS), Darwin)
+	MLXFLAGS	:=	-framework OpenGL -framework AppKit
+endif
 
 CURRENT_FOLDER		:=	$(shell pwd)
 LIBFT_FOLDER		:=	libs/libft
 LIBFT_MLX_FOLDER	:=	libs/libft_mlx
-MLX_FOLDER			:=	libs/libmlx
+MLX_FOLDER			:=	libs/libmlx_${detected_OS}
 
 MAKE_LIBFT			:= @make -s -C ${LIBFT_FOLDER}
 MAKE_LIBFT_MLX		:= @make -s -C ${LIBFT_MLX_FOLDER}
@@ -29,9 +39,9 @@ INCLUDES			:=	-I ${LIBFT_FOLDER}/includes \
 						-I ${LIBFT_MLX_FOLDER}/includes \
 						-I ${MLX_FOLDER} \
 						-I ./includes
-LIBRARIES			:=	-L ${LIBFT_FOLDER} -lft \
-						-L ${LIBFT_MLX_FOLDER} -lft_mlx \
-						-L ${MLX_FOLDER} -lmlx
+LIBRARIES			:=	-L./${LIBFT_MLX_FOLDER} -lft_mlx \
+						-L./${LIBFT_FOLDER} -lft \
+						-L./${MLX_FOLDER} -lmlx
 
 NAME				:=	so_long
 FILES				:=	main.c \
@@ -49,7 +59,7 @@ ${NAME}:	${SRCS} ${HEADERS}
 	${MAKE_MLX}
 	${MAKE_LIBFT_MLX} LIBFT_FOLDER=${CURRENT_FOLDER}/${LIBFT_FOLDER} \
 		MLX_FOLDER=${CURRENT_FOLDER}/${MLX_FOLDER}
-	${CC} ${CFLAGS} ${MLXFLAGS} ${SRCS} ${INCLUDES} ${LIBRARIES} -o $@
+	${CC} ${CFLAGS} ${SRCS} ${INCLUDES} ${LIBRARIES} ${MLXFLAGS} -o $@
 
 all:	${NAME}
 
