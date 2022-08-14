@@ -6,7 +6,7 @@
 /*   By: mykman <mykman@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 02:41:23 by mykman            #+#    #+#             */
-/*   Updated: 2022/08/12 16:14:53 by mykman           ###   ########.fr       */
+/*   Updated: 2022/08/14 19:39:56 by mykman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_scene	*new_scene_waiting(void *mlx, t_point size)
 		free(scene);
 		return (NULL);
 	}
-	scene->square = (t_square){{{0, 0}, {50, 50}}, {5, 5}};
+	scene->square = (t_square){{{0, 0}, {20, 20}}, {5, 5}};
 	ft_scene_setbg(scene->scene, 0x00FFFFFF);
 	return (&scene->scene);
 }

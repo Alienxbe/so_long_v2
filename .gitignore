@@ -54,3 +54,4 @@ dkms.conf
 .vscode/
 
 so_long
+.DS_Store
