@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*   sc_main.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mykman <mykman@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/10 14:29:47 by mykman            #+#    #+#             */
-/*   Updated: 2022/08/10 14:32:14 by mykman           ###   ########.fr       */
+/*   Created: 2022/09/05 16:23:17 by mykman            #+#    #+#             */
+/*   Updated: 2022/09/05 16:45:18 by mykman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#ifndef SC_MAIN_H
+# define SC_MAIN_H
 
-void	ft_exit(const char *msg, int value)
-{
-	ft_fprintf(STDERR_FILENO, "%s\n", msg);
-	exit(value);
-}
+# include "t_scene.h"
 
-void	ft_error(const char *msg)
+typedef struct s_sc_main
 {
-	ft_exit(msg, EXIT_FAILURE);
-}
+	t_sfe			*sfe;
+	t_scene			scene;
+	unsigned int	color;
+}	t_sc_main;
 
-int		ft_endexec(void)
-{
-	exit(EXIT_SUCCESS);
-}
+int	main_init(t_sc_main *sc);
+int	main_update(t_sc_main *sc);
+
+#endif

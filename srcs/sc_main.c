@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_scene_waiting.h                                 :+:      :+:    :+:   */
+/*   sc_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mykman <mykman@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/12 02:39:47 by mykman            #+#    #+#             */
-/*   Updated: 2022/08/12 03:52:40 by mykman           ###   ########.fr       */
+/*   Created: 2022/09/05 16:23:09 by mykman            #+#    #+#             */
+/*   Updated: 2022/09/05 19:52:42 by mykman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_SCENE_WAITING_H
-# define FT_SCENE_WAITING_H
+#include "sc_main.h"
+#include "sfe_scene.h"
+#include "ft_printf.h"
 
-# include "ft_scene.h"
-
-typedef struct s_square
+int	main_init(t_sc_main *sc)
 {
-	t_area	pos;
-	t_point	move;
-}	t_square;
+	ft_printf("Init scene main\n");
+	sc->color = 0x5a32a8;
+	return (1);
+}
 
-typedef struct s_scene_waiting
+int	main_update(t_sc_main *sc)
 {
-	t_scene		scene;
-	t_square	square;
-}	t_scene_waiting;
-
-t_scene	*new_scene_waiting(void *mlx, t_point size);
-
-#endif
+	sfe_scene_setbg(sc->scene, sc->color);
+	sc->color += 0xFFFFFF;
+	return (1);
+}

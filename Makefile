@@ -6,74 +6,92 @@
 #    By: mykman <mykman@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/10 04:00:41 by mykman            #+#    #+#              #
-#    Updated: 2022/08/12 23:45:05 by mykman           ###   ########.fr        #
+#    Updated: 2022/09/05 16:29:03 by mykman           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# OS
+# ------------------------------------VARS-------------------------------------
+
+CURRENT_FOLDER		:=	$(shell pwd)
+
 ifeq ($(OS),Windows_NT) 
 	detected_OS := Windows
 else
 	detected_OS := $(shell uname)
 endif
 
-# COMPILATION
+# ---------------------------------Compilation---------------------------------
+
 CC					:=	@gcc
 CFLAGS				:=	-Wall -Wextra -Werror
+
 ifeq ($(detected_OS), Linux)
-	MLXFLAGS	:=	-lXext -lX11 -lm -lz
+	MLXFLAGS		:=	-lXext -lX11 -lm -lz
 else ifeq ($(detected_OS), Darwin)
-	MLXFLAGS	:=	-framework OpenGL -framework AppKit
+	MLXFLAGS		:=	-framework OpenGL -framework AppKit
 endif
 
-CURRENT_FOLDER		:=	$(shell pwd)
-LIBFT_FOLDER		:=	libs/libft
-LIBFT_MLX_FOLDER	:=	libs/libft_mlx
+# ---------------------------------Librairies----------------------------------
+
+FT_FOLDER			:=	libs/libft
 MLX_FOLDER			:=	libs/libmlx_${detected_OS}
+SFE_FOLDER			:=	libs/SnowFlakeEngine
 
-MAKE_LIBFT			:= @make -s -C ${LIBFT_FOLDER}
-MAKE_LIBFT_MLX		:= @make -s -C ${LIBFT_MLX_FOLDER}
-MAKE_MLX			:= @make -s -C ${MLX_FOLDER}
+FT					:=	${FT_FOLDER}/libft.a
+MLX					:=	${MLX_FOLDER}/libmlx.a
+SFE					:=	${SFE_FOLDER}/libsfe.a
 
-INCLUDES			:=	-I ${LIBFT_FOLDER}/includes \
-						-I ${LIBFT_MLX_FOLDER}/includes \
+MAKE_FT				:=	@make -s -C ${FT_FOLDER}
+MAKE_MLX			:=	@make -s -C ${MLX_FOLDER}
+MAKE_SFE			:=	@make -s -C ${SFE_FOLDER}
+
+INCLUDES			:=	-I ${FT_FOLDER}/includes \
 						-I ${MLX_FOLDER} \
+						-I ${SFE_FOLDER}/includes \
 						-I ./includes
-LIBRARIES			:=	-L./${LIBFT_MLX_FOLDER} -lft_mlx \
-						-L./${LIBFT_FOLDER} -lft \
-						-L./${MLX_FOLDER} -lmlx
+LIBRARIES			:=	-L./${FT_FOLDER} -lft \
+						-L./${MLX_FOLDER} -lmlx \
+						-L./${SFE_FOLDER} -lsfe
+
+# --------------------------------Source files---------------------------------
 
 NAME				:=	so_long
 FILES				:=	main.c \
-						ft_scene_waiting.c \
-						ft_scene_title_screen.c \
-						ft_exit.c
+						sc_main.c
 SRCS				:=	$(addprefix srcs/, ${FILES})
-FILES				:=	so_long.h \
-						ft_scene_waiting.h \
-						ft_scene_title_screen.h
+FILES				:=	so_long.h
 HEADERS				:=	$(addprefix includes/, ${FILES});
 
-${NAME}:	${SRCS} ${HEADERS}
-	${MAKE_LIBFT}
-	${MAKE_MLX}
-	${MAKE_LIBFT_MLX} LIBFT_FOLDER=${CURRENT_FOLDER}/${LIBFT_FOLDER} \
-		MLX_FOLDER=${CURRENT_FOLDER}/${MLX_FOLDER}
+# -----------------------------------Rules-------------------------------------
+
+$(NAME):	${FT} ${MLX} ${SFE} ${SRCS} ${HEADERS}
 	${CC} ${CFLAGS} ${SRCS} ${INCLUDES} ${LIBRARIES} ${MLXFLAGS} -o $@
+
+$(FT):
+	${MAKE_FT}
+
+$(MLX):
+	${MAKE_MLX}
+
+$(SFE):
+	${MAKE_SFE} LIBFT_FOLDER=${CURRENT_FOLDER}/${FT_FOLDER} \
+				MLX_FOLDER=${CURRENT_FOLDER}/${MLX_FOLDER}
 
 all:	${NAME}
 
 clean:
-	${MAKE_LIBFT} clean
-	${MAKE_LIBFT_MLX} clean
+	${MAKE_FT} clean
 	${MAKE_MLX} clean
+	${MAKE_SFE} clean
 
 fclean:
-	${MAKE_LIBFT} fclean
-	${MAKE_LIBFT_MLX} fclean
+	${MAKE_FT} fclean
 	${MAKE_MLX} clean
+	${MAKE_SFE} fclean
 	@rm -f ${NAME}
 
 re:		fclean all
+
+# -----------------------------------.PHONY------------------------------------
 
 .PHONY:	all clean fclean re

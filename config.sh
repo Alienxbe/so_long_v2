@@ -6,7 +6,7 @@
 #    By: mykman <mykman@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/12 04:39:40 by mykman            #+#    #+#              #
-#    Updated: 2022/08/12 04:41:52 by mykman           ###   ########.fr        #
+#    Updated: 2022/09/05 16:17:38 by mykman           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,10 +20,10 @@ else
 	git -C libs/libft pull
 fi
 
-# Libft_mlx installation or update
-if [ ! -d "libs/libft_mlx" ]
+# SnowFlakeEngine installation or update
+if [ ! -d "libs/SnowFlakeEngine" ]
 then
-	git clone https://github.com/Alienxbe/libft_mlx libs/libft_mlx
+	git clone https://github.com/Alienxbe/SnowFlakeEngine libs/SnowFlakeEngine
 else
-	git -C libs/libft_mlx pull
+	git -C libs/SnowFlakeEngine pull
 fi

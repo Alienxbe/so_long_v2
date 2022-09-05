@@ -6,76 +6,41 @@
 /*   By: mykman <mykman@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 04:00:44 by mykman            #+#    #+#             */
-/*   Updated: 2022/08/14 23:00:57 by mykman           ###   ########.fr       */
+/*   Updated: 2022/09/05 16:54:15 by mykman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <time.h>
-#include <stdio.h>
+#include "sfe_event.h"
+#include "ft_printf.h"
+#include <stdlib.h>
 
-// SnowFlake / libsf
-
-static int	ajust_frame_rate(int animation_time)
+int	on_key_down(int key, t_sc_main *sc)
 {
-	if (animation_time < (CLOCKS_PER_SEC / FPS_MAX))
+	(void)sc;
+	if (key == 53)
 	{
-		usleep((CLOCKS_PER_SEC / FPS_MAX) - animation_time);
-		animation_time = (CLOCKS_PER_SEC / FPS_MAX);
+		sfe_destroy(sc->sfe);
+		exit(0);
 	}
-	return (CLOCKS_PER_SEC / animation_time);
-}
-
-int		update(t_data *d)
-{
-	clock_t	update_time;
-
-	update_time = clock();
-	if (!d->active_scene->update)
-		ft_error("No update function to active scene");
-	if (!d->active_scene->update(d->active_scene->param))
-		ft_error("Scene update error");
-	ft_put_image_to_window(d->mlx, d->win, d->active_scene->img, (t_point){0});
-	// ajust_frame_rate(clock() - update_time);
-	ft_printf("FPS: %d\n", ajust_frame_rate(clock() - update_time));
+	ft_printf("Key pressed: %d\n", key);
 	return (1);
 }
 
-void	so_long(int argc, const char **argv)
+int	main(void)
 {
-	t_data	d;
+	t_sfe		*sfe;
+	t_sc_main	sc;
 
-	(void)argc;
-	(void)argv;
-	ft_bzero(&d, sizeof(d));
-	d.mlx = mlx_init();
-	if (!d.mlx)
-		ft_error("Mlx init failed");
-	d.win = ft_new_window(d.mlx, new_point(WIN_WIDTH, WIN_HEIGHT), WIN_NAME,
-		&ft_endexec);
-	if (!d.win.win_ptr)
-		ft_error("Window init failed");
+	sfe = sfe_init(WIN_NAME, new_point(WIN_DIM));
+	sfe_set_max_fps(sfe, 60);
 
-	ft_randinit();
-	
-	mlx_loop_hook(d.mlx, &update, &d);
-	d.scene_collection[sc_waiting] = new_scene_waiting(d.mlx, d.win.size);
-	d.scene_collection[sc_title_screen] = new_scene_title_screen(d.mlx, d.win.size);
-	d.active_scene = d.scene_collection[sc_title_screen];
+	sc.scene = sfe_new_scene(sfe, &main_init, &main_update, &sc);
+	sc.sfe = sfe;
 
-	mlx_loop(d.mlx);
-}
+	sfe_set_active_scene(sfe, &sc.scene);
+	sfe_hook(sfe, ON_KEYDOWN, &on_key_down, &sc);
 
-int main(int argc, const char **argv)
-{
-	if (argc != 2)
-		ft_error("Usage: ./so_long [map_path]");
-	so_long(argc, argv);
-	// void	*sf;
-
-	// sf = sf_init(WIN_WIDTH, WIN_HEIGHT, WIN_NAME);
-	// scene = sf_new_scene(sf, int (*init)(), int (*update), void *param);
-	// sf_set_active_scene(sf, scene);
-	// sf_loop()
+	sfe_loop(sfe);
 	return (0);
 }
