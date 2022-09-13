@@ -6,7 +6,7 @@
 /*   By: mykman <mykman@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 16:23:17 by mykman            #+#    #+#             */
-/*   Updated: 2022/09/05 16:45:18 by mykman           ###   ########.fr       */
+/*   Updated: 2022/09/11 18:07:39 by mykman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ typedef struct s_sc_main
 {
 	t_sfe			*sfe;
 	t_scene			scene;
-	unsigned int	color;
+	t_bool			running;
+	t_img			
 }	t_sc_main;
 
 int	main_init(t_sc_main *sc);

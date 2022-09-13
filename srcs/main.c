@@ -6,7 +6,7 @@
 /*   By: mykman <mykman@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 04:00:44 by mykman            #+#    #+#             */
-/*   Updated: 2022/09/05 16:54:15 by mykman           ###   ########.fr       */
+/*   Updated: 2022/09/05 20:02:57 by mykman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,8 @@
 
 int	on_key_down(int key, t_sc_main *sc)
 {
-	(void)sc;
 	if (key == 53)
-	{
-		sfe_destroy(sc->sfe);
-		exit(0);
-	}
+		sc->running = false;
 	ft_printf("Key pressed: %d\n", key);
 	return (1);
 }
@@ -33,7 +29,7 @@ int	main(void)
 	t_sc_main	sc;
 
 	sfe = sfe_init(WIN_NAME, new_point(WIN_DIM));
-	sfe_set_max_fps(sfe, 60);
+	sfe_set_max_fps(sfe, 120);
 
 	sc.scene = sfe_new_scene(sfe, &main_init, &main_update, &sc);
 	sc.sfe = sfe;
