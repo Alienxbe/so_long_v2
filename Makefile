@@ -6,7 +6,7 @@
 #    By: mykman <mykman@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/10 04:00:41 by mykman            #+#    #+#              #
-#    Updated: 2022/09/05 16:29:03 by mykman           ###   ########.fr        #
+#    Updated: 2022/09/14 22:26:04 by mykman           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,8 @@ LIBRARIES			:=	-L./${FT_FOLDER} -lft \
 
 NAME				:=	so_long
 FILES				:=	main.c \
-						sc_main.c
+						sc_main.c \
+						sfe_load_sprite_sheet.c
 SRCS				:=	$(addprefix srcs/, ${FILES})
 FILES				:=	so_long.h
 HEADERS				:=	$(addprefix includes/, ${FILES});
