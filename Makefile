@@ -6,7 +6,7 @@
 #    By: mykman <mykman@student.s19.be>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/10 04:00:41 by mykman            #+#    #+#              #
-#    Updated: 2022/09/05 16:29:03 by mykman           ###   ########.fr        #
+#    Updated: 2022/09/15 20:30:34 by mykman           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ INCLUDES			:=	-I ${FT_FOLDER}/includes \
 						-I ${MLX_FOLDER} \
 						-I ${SFE_FOLDER}/includes \
 						-I ./includes
-LIBRARIES			:=	-L./${FT_FOLDER} -lft \
+LIBRARIES			:=	-L./${MLX_FOLDER} -lmlx \
 						-L./${MLX_FOLDER} -lmlx \
 						-L./${SFE_FOLDER} -lsfe
 
@@ -65,7 +65,7 @@ HEADERS				:=	$(addprefix includes/, ${FILES});
 # -----------------------------------Rules-------------------------------------
 
 $(NAME):	${FT} ${MLX} ${SFE} ${SRCS} ${HEADERS}
-	${CC} ${CFLAGS} ${SRCS} ${INCLUDES} ${LIBRARIES} ${MLXFLAGS} -o $@
+	${CC} ${CFLAGS} ${SRCS} ${INCLUDES} ${MLXFLAGS} ${LIBRARIES} -o $@
 
 $(FT):
 	${MAKE_FT}
