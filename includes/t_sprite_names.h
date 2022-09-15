@@ -1,30 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sc_main.h                                          :+:      :+:    :+:   */
+/*   t_sprite_names.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mykman <mykman@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/05 16:23:17 by mykman            #+#    #+#             */
-/*   Updated: 2022/09/15 22:57:54 by mykman           ###   ########.fr       */
+/*   Created: 2022/09/15 22:56:19 by mykman            #+#    #+#             */
+/*   Updated: 2022/09/15 22:57:15 by mykman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SC_MAIN_H
-# define SC_MAIN_H
+#ifndef T_SPRITE_NAMES_H
+# define T_SPRITE_NAMES_H
 
-# include "t_scene.h"
-
-typedef struct s_sc_main
+typedef enum e_sprite_names
 {
-	t_sfe			*sfe;
-	t_scene			scene;
-	t_bool			running;
-}	t_sc_main;
-
-int	main_init(t_sc_main *sc);
-int	main_update(t_sc_main *sc);
-
-t_img	*sfe_load_sprite_sheet(t_sfe *sfe, char *filename, t_point sprite_size);
+	empty,
+	block,
+	bar_v0,
+	bar_v1,
+	bar_v2,
+	bar_h0,
+	bar_h1,
+	bar_h2,
+	block_nw,
+	block_n,
+	block_ne,
+	block_w,
+	block_center,
+	block_e,
+	block_sw,
+	block_s,
+	block_se,
+	block_particle
+}	t_sprite_names;
 
 #endif

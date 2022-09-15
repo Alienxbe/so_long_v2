@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sc_main.h                                          :+:      :+:    :+:   */
+/*   t_keys.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mykman <mykman@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/05 16:23:17 by mykman            #+#    #+#             */
-/*   Updated: 2022/09/15 22:57:54 by mykman           ###   ########.fr       */
+/*   Created: 2022/09/15 22:57:26 by mykman            #+#    #+#             */
+/*   Updated: 2022/09/15 22:57:57 by mykman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SC_MAIN_H
-# define SC_MAIN_H
+#ifndef T_KEYS
+# define T_KEYS
 
-# include "t_scene.h"
-
-typedef struct s_sc_main
+typedef enum e_keys
 {
-	t_sfe			*sfe;
-	t_scene			scene;
-	t_bool			running;
-}	t_sc_main;
-
-int	main_init(t_sc_main *sc);
-int	main_update(t_sc_main *sc);
-
-t_img	*sfe_load_sprite_sheet(t_sfe *sfe, char *filename, t_point sprite_size);
+	key_esc = 53,
+	key_left = 123,
+	key_right,
+	key_down,
+	key_up
+}	t_keys;
 
 #endif

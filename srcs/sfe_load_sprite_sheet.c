@@ -6,7 +6,7 @@
 /*   By: mykman <mykman@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 22:09:18 by mykman            #+#    #+#             */
-/*   Updated: 2022/09/14 22:30:51 by mykman           ###   ########.fr       */
+/*   Updated: 2022/09/15 22:27:25 by mykman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ t_img	*sfe_load_sprite_sheet(t_sfe *sfe, char *filename, t_point sprite_size)
 	sheet = sfe_xpm_file_to_image(sfe->mlx_ptr, filename);
 	if (!sheet.img)
 		return (NULL);
-		ft_printf("ICI\n");
 	sprite_dim.x = sheet.size.x / sprite_size.x;
 	sprite_dim.y = sheet.size.y / sprite_size.y;
 	sprite_count = sprite_dim.x * sprite_dim.y;

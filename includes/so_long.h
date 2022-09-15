@@ -6,14 +6,14 @@
 /*   By: mykman <mykman@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 14:30:05 by mykman            #+#    #+#             */
-/*   Updated: 2022/09/05 16:30:42 by mykman           ###   ########.fr       */
+/*   Updated: 2022/09/15 20:39:50 by mykman           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# define WIN_DIM	500, 400
+# define WIN_DIM	512, 512
 # define WIN_NAME	"so_long"
 # define FPS_MAX	120
 
